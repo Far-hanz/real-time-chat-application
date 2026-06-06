@@ -147,26 +147,26 @@ Responsibilities:
 - Deployment
 - Documentation & Presentation
 
-### 👨‍💻 Member 2
+### 👨‍💻 Saud
 **Authentication & User Management**
 - Registration
 - Login/Logout
 - User Profiles
 
-### 👨‍💻 Member 3
+### 👨‍💻 Siri
 **Real-Time Messaging**
 - One-to-One Chat
 - Online Status
 - Typing Indicator
 
-### 👨‍💻 Member 4
+### 👨‍💻 Vinusha
 **Chat Features**
 - Group Chats
 - Message History
 - Message Search
 - Read Receipts
 
-### 👨‍💻 Member 5
+### 👨‍💻 Deepthi
 **Frontend UI & Notifications**
 - Chat Interface
 - Responsive Design
