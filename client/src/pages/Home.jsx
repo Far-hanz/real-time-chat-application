@@ -1,15 +1,15 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '../components/Avatar';
 import useAuth from '../hooks/useAuth';
+import ChatList from '../components/Chat/ChatList';
+import ChatWindow from '../components/Chat/ChatWindow';
 
-// Placeholder landing for signed-in users.
-// The chat interface (sidebar, threads, messages) plugs in here:
-//   - One-to-one messaging + typing indicator  -> Siri
-//   - Groups, history, search, read receipts   -> Vinusha
-//   - Chat UI, notifications, reactions        -> Deepthi
 export default function Home() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [selectedUser, setSelectedUser] = useState(null);
+  
 
   const handleLogout = async () => {
     await logout();
@@ -26,30 +26,25 @@ export default function Home() {
           pulse<span className="wordmark-dot" />
         </span>
         <nav className="topbar-actions">
-          <Link to="/profile" className="topbar-user" title="Your profile">
+          <Link to="/profile" className="topbar-user">
             <Avatar user={user} size="sm" showStatus />
             <span>{user.name}</span>
           </Link>
-          <button className="btn btn-ghost btn-sm" type="button" onClick={handleLogout}>
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={handleLogout}
+          >
             Log out
           </button>
         </nav>
       </header>
 
-      <main className="home-wrap">
-        <p className="auth-eyebrow reveal">signed in · auth module</p>
-        <h1 className="home-title reveal" style={{ animationDelay: '0.08s' }}>
-          You're in, {user.name.split(' ')[0]}.
-        </h1>
-        <p className="home-subtitle reveal" style={{ animationDelay: '0.16s' }}>
-          Authentication and user management are live. The conversation view — messages,
-          groups, typing indicators and notifications — lands here next.
-        </p>
-        <div className="home-actions reveal" style={{ animationDelay: '0.24s' }}>
-          <Link to="/profile" className="btn btn-primary">
-            Manage your profile
-          </Link>
-        </div>
+      <main className="chat-shell">
+        <ChatList
+          selectedUser={selectedUser}
+          onSelectUser={setSelectedUser}
+        />
+        <ChatWindow selectedUser={selectedUser} />
       </main>
     </div>
   );
