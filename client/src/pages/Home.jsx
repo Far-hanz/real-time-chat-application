@@ -10,11 +10,20 @@ export default function Home() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [selectedUser, setSelectedUser] = useState(null);
-  
+  const [showChat, setShowChat] = useState(false);
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
+  };
+
+  const handleSelectUser = (user) => {
+    setSelectedUser(user);
+    setShowChat(true); // on mobile → show chat
+  };
+
+  const handleBack = () => {
+    setShowChat(false); // on mobile → go back to sidebar
   };
 
   return (
@@ -26,25 +35,38 @@ export default function Home() {
         <span className="wordmark">
           pulse<span className="wordmark-dot" />
         </span>
-        
-<nav className="topbar-actions">
-  <Link to="/profile" className="topbar-user">
-    <Avatar user={user} size="sm" showStatus />
-    <span>{user.name}</span>
-  </Link>
-  <NotificationBell socket={null} />  {/* socket comes from Farhan later */}
-  <button className="btn btn-ghost btn-sm" onClick={handleLogout}>
-    Log out
-  </button>
-</nav>
+        <nav className="topbar-actions">
+          <Link to="/profile" className="topbar-user">
+            <Avatar user={user} size="sm" showStatus />
+            <span>{user.name}</span>
+          </Link>
+          <NotificationBell socket={null} />
+          <button
+            className="btn btn-ghost btn-sm"
+            onClick={handleLogout}
+          >
+            Log out
+          </button>
+        </nav>
       </header>
 
       <main className="chat-shell">
-        <ChatList
-          selectedUser={selectedUser}
-          onSelectUser={setSelectedUser}
-        />
-        <ChatWindow selectedUser={selectedUser} />
+        {/* Sidebar — hidden on mobile when chat is open */}
+        <div className={`chat-sidebar-wrap ${showChat ? 'hidden' : ''}`}>
+          <ChatList
+            selectedUser={selectedUser}
+            onSelectUser={handleSelectUser}
+          />
+        </div>
+
+        {/* Chat Window — hidden on mobile when sidebar is shown */}
+        <div className={`chat-window-wrap ${!showChat ? 'hidden-mobile' : ''}`}>
+          <ChatWindow
+            selectedUser={selectedUser}
+            onBack={handleBack}
+            socket={null}
+          />
+        </div>
       </main>
     </div>
   );

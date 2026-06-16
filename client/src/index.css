@@ -1169,3 +1169,76 @@ a:hover {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ===== MOBILE RESPONSIVE FINAL FIX ===== */
+
+.chat-sidebar-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-width: 300px;
+}
+
+.chat-window-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.back-btn {
+  display: none;
+  padding: 10px 16px;
+  background: #1e1e2e;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: #6c63ff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  z-index: 999;
+}
+
+.chat-sidebar-wrap.hidden {
+  display: none !important;
+}
+
+.chat-window-wrap.hidden-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .chat-shell {
+    position: relative;
+    height: calc(100vh - 70px);
+  }
+
+  .chat-sidebar-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    min-width: 100% !important;
+    z-index: 10;
+    background: #1e1e2e;
+  }
+
+  .chat-window-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: #13131f;
+  }
+
+  .back-btn {
+    display: block !important;
+  }
+}

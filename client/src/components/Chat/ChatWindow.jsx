@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
 
-export default function ChatWindow({ selectedUser, socket }) {
+export default function ChatWindow({ selectedUser, socket, onBack }) {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -93,6 +93,15 @@ export default function ChatWindow({ selectedUser, socket }) {
 
   return (
     <div className="chat-window">
+
+      {/* Back button - mobile only */}
+      <button
+        className="back-btn"
+        onClick={onBack}
+      >
+        ← Back
+      </button>
+
       {/* Header */}
       <div className="chat-header">
         <Avatar user={selectedUser} size="md" showStatus />
@@ -113,9 +122,7 @@ export default function ChatWindow({ selectedUser, socket }) {
             isMe={msg.senderId === user._id}
           />
         ))}
-        {isTyping && (
-          <TypingIndicator name={selectedUser.name} />
-        )}
+        {isTyping && <TypingIndicator name={selectedUser.name} />}
         <div ref={endRef} />
       </div>
 
