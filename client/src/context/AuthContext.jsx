@@ -12,9 +12,15 @@ export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  /*const [user, setUser] = useState({
+  _id: 'fake123',
+  name: 'Deepthi',
+  email: 'deepthi@test.com',
+  isOnline: true,
+});*/
 
   const [initializing, setInitializing] = useState(true);
- 
+  //const [initializing, setInitializing] = useState(false);
 
   // Restore the session on first load if a token is stored
   useEffect(() => {
