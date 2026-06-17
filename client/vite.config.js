@@ -6,11 +6,15 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      // Forward API calls to the Express server during development
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
   },
 });

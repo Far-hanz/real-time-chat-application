@@ -4,15 +4,6 @@ import useAuth from '../../hooks/useAuth';
 
 export default function ChatList({ selectedUser, onSelectUser }) {
   const [users, setUsers] = useState([]);
-  /*const FAKE_USERS = [
-  { _id: '1', name: 'Farhan', isOnline: true },
-  { _id: '2', name: 'Saud', isOnline: true },
-  { _id: '3', name: 'Siri', isOnline: false },
-  { _id: '4', name: 'Vinusha', isOnline: true },
-];
-
-const [users, setUsers] = useState(FAKE_USERS);
-*/
   const [search, setSearch] = useState('');
   const { token } = useAuth();
 
